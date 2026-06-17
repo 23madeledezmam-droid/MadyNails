@@ -1,1 +1,119 @@
-index.htlm
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora y Agenda - Estudio de Uñas</title>
+<style>
+body{font-family:'Poppins',sans-serif;background:#fff;color:#333;margin:0;padding:0}
+header{text-align:center;padding:30px 10px;background:#fff;border-bottom:1px solid #eee}
+header h1{color:#800020;font-weight:600}
+.container{max-width:600px;margin:30px auto;padding:20px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,0.05);background:#fff}
+.section{margin-bottom:25px}
+.section h2{color:#800020;font-size:18px;margin-bottom:10px}
+select,input,button{width:100%;padding:12px;margin-top:8px;border:1px solid #ddd;border-radius:10px;font-size:15px}
+button{background:#800020;color:#fff;border:none;cursor:pointer;transition:0.3s}
+button:hover{background:#a52a2a}
+.summary{background:#fafafa;padding:15px;border-radius:10px;margin-top:20px;border:1px solid #eee}
+.total{font-size:20px;font-weight:600;color:#800020;text-align:center;margin-top:10px}
+.whatsapp{display:block;text-align:center;margin-top:20px;text-decoration:none;background:#25D366;color:#fff;padding:12px;border-radius:10px;font-weight:500}
+</style>
+</head>
+<body>
+<header>
+<h1>💅 Bienvenida a [Nombre de mi estudio]</h1>
+<p>Elegancia y cuidado en cada detalle</p>
+</header>
+
+<div class="container">
+<div class="section">
+<h2>1. Selecciona la técnica</h2>
+<select id="tecnica">
+<option value="0">Selecciona una opción</option>
+<option value="30000">Manicura tradicional - $30.000</option>
+<option value="60000">Base Rubber - $60.000</option>
+<option value="90000">Press On - $90.000</option>
+<option value="100000">Polygel - $100.000</option>
+<option value="115000">Acrílico esculpido - $115.000</option>
+</select>
+</div>
+
+<div class="section">
+<h2>2. Selecciona el largo</h2>
+<select id="largo">
+<option value="0">Selecciona una opción</option>
+<option value="0">Natural (sin costo adicional)</option>
+<option value="5000">Corto (+$5.000)</option>
+<option value="10000">Mediano (+$10.000)</option>
+<option value="15000">Largo (+$15.000)</option>
+<option value="20000">XL (+$20.000)</option>
+</select>
+</div>
+
+<div class="section">
+<h2>3. Selecciona el diseño</h2>
+<select id="diseno">
+<option value="0">Sin decoración</option>
+<option value="10000">Nail Art básico (+$10.000)</option>
+<option value="20000">Nail Art avanzado (+$20.000)</option>
+<option value="25000">Encapsulado (+$25.000)</option>
+<option value="30000">Diseño 3D (+$30.000)</option>
+</select>
+</div>
+
+<div class="section">
+<h2>4. Agendar cita</h2>
+<input type="text" id="nombre" placeholder="Nombre completo">
+<input type="tel" id="celular" placeholder="Celular">
+<input type="date" id="fecha">
+<input type="time" id="hora">
+<input type="text" id="direccion" placeholder="Dirección (opcional)">
+<textarea id="observaciones" placeholder="Observaciones" style="width:100%;height:80px;margin-top:8px;border:1px solid #ddd;border-radius:10px;padding:10px"></textarea>
+</div>
+
+<button onclick="calcular()">Calcular total</button>
+
+<div class="summary" id="resumen" style="display:none">
+<h2>Resumen de tu cita</h2>
+<p id="detalle"></p>
+<p class="total" id="total"></p>
+<a id="whatsapp" class="whatsapp" target="_blank">Agendar por WhatsApp</a>
+</div>
+</div>
+
+<script>
+function calcular(){
+let tecnica=parseInt(document.getElementById('tecnica').value);
+let largo=parseInt(document.getElementById('largo').value);
+let diseno=parseInt(document.getElementById('diseno').value);
+let nombre=document.getElementById('nombre').value;
+let celular=document.getElementById('celular').value;
+let fecha=document.getElementById('fecha').value;
+let hora=document.getElementById('hora').value;
+let direccion=document.getElementById('direccion').value;
+let observaciones=document.getElementById('observaciones').value;
+
+if(tecnica===0){alert("Selecciona una técnica");return;}
+if(!nombre||!celular||!fecha||!hora){alert("Completa los datos de la cita");return;}
+
+let total=tecnica+largo+diseno;
+document.getElementById('resumen').style.display='block';
+document.getElementById('detalle').innerHTML=
+`<strong>Técnica:</strong> ${document.getElementById('tecnica').options[document.getElementById('tecnica').selectedIndex].text}<br>
+<strong>Largo:</strong> ${document.getElementById('largo').options[document.getElementById('largo').selectedIndex].text}<br>
+<strong>Diseño:</strong> ${document.getElementById('diseno').options[document.getElementById('diseno').selectedIndex].text}<br>
+<strong>Fecha:</strong> ${fecha} <strong>Hora:</strong> ${hora}<br>
+<strong>Dirección:</strong> ${direccion||'No aplica'}<br>
+<strong>Observaciones:</strong> ${observaciones||'Ninguna'}`;
+document.getElementById('total').innerText=`Total estimado: $${total.toLocaleString()}`;
+
+let mensaje=`Hola! Soy ${nombre}. Quiero agendar una cita para ${document.getElementById('tecnica').options[document.getElementById('tecnica').selectedIndex].text}. Largo: ${document.getElementById('largo').options[document.getElementById('largo').selectedIndex].text}. Diseño: ${document.getElementById('diseno').options[document.getElementById('diseno').selectedIndex].text}. Fecha: ${fecha} Hora: ${hora}. Dirección: ${direccion}. Observaciones: ${observaciones}. Total estimado: $${total.toLocaleString()}`;
+let url=`https://wa.me/573236554838?text=${encodeURIComponent(mensaje)}`;
+document.getElementById('whatsapp').href=url;
+}
+</script>
+</body>
+</html>
+```
+
